@@ -1,20 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:my_time/intro/intro2.dart';
 
 class Intro1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                alignment: Alignment.center,
+                fit: BoxFit.fill,
+                image: AssetImage("./assets/pictures/background1.png"))),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-        Center(
-          child: Text
-          ("Begin your journal")
+          children: [
+            SizedBox(
+              height: 150,
             ),
-          Text("Nahee")
-        ],
+            Image.asset('./assets/pictures/running-people.png'),
+            SizedBox(
+              height: 50,
+            ),
+            Center(
+                child: Text(
+              "Begin your journal",
+            )),
+            SizedBox(
+              height: 25,
+            ),
+            Text("Insert stuff here..."),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              width: 125,
+              height: 40,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Intro2()));
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.pink),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  "Hello",
+                  style: TextStyle(fontSize: 25),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
