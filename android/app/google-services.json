@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "67979803505",
+    "project_id": "chaletmytime",
+    "storage_bucket": "chaletmytime.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67979803505:android:0dd1505bb5bbb08ae614d0",
+        "android_client_info": {
+          "package_name": "com.example.my_time"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67979803505-ml97daf94g7h46c6g6qdlasvgihfesdj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6vsnYLFvu1OwH328vakyeOTNZoHQ0Zu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67979803505-ml97daf94g7h46c6g6qdlasvgihfesdj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
