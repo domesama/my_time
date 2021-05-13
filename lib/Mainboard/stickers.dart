@@ -13,7 +13,8 @@ class StickersPage extends StatefulWidget {
 
 class _StickersPageState extends State<StickersPage> {
   FirebaseAuth _auth = FirebaseAuth.instance;
-  Widget _extraWidgets = Container();
+  Widget _extraWidgets =
+      Container(child: Image.asset("./assets/pictures/random.png"));
 
   void addExtraWidgets(Widget widget) {
     setState(() {
@@ -28,12 +29,6 @@ class _StickersPageState extends State<StickersPage> {
     "sticker4.png"
   ];
 
-  List<String> _availableStickers = [
-    "sticker1.png",
-    "sticker2.png",
-    "sticker3.png",
-    "sticker4.png"
-  ];
   // void updateCurrentlyAvailable(List<String> stringList) {
   //   setState(() {
   //     _availableStickers = [...stringList, ...pictureUrl].toSet().toList();
@@ -68,37 +63,128 @@ class _StickersPageState extends State<StickersPage> {
 
             return Container(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // ..._availableStickers.map((e) => Container(
                   //       child: Text(e),
                   //     )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'MY',
+                        style: TextStyle(
+                            fontSize: 100,
+                            color: Colors.brown,
+                            fontFamily: "Tropical"),
+                      ),
+                      Text(
+                        'TIME',
+                        style: TextStyle(
+                            fontSize: 100,
+                            color: Colors.lightGreen[300],
+                            fontFamily: "Tropical"),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   _extraWidgets,
                   ElevatedButton(
                     onPressed: () async {
-                      Random rnd = new Random();
-                      var randomNumber =
-                          rnd.nextInt(myUser.availableStickers.length);
+                      if (myUser.availableStickers.length > 0) {
+                        Random rnd = new Random();
+                        var randomNumber =
+                            rnd.nextInt(myUser.availableStickers.length);
 
-                      addExtraWidgets(Container(
-                          width: MediaQuery.of(context).size.width * 0.50,
-                          height: MediaQuery.of(context).size.height * 0.50,
-                          child: Image.asset("./assets/pictures/" +
-                              myUser.availableStickers[randomNumber])));
+                        addExtraWidgets(Container(
+                            width: MediaQuery.of(context).size.width * 0.50,
+                            height: MediaQuery.of(context).size.height * 0.50,
+                            child: Image.asset("./assets/pictures/" +
+                                myUser.availableStickers[randomNumber])));
 
-                      await FirebaseFirestore.instance
-                          .collection("users")
-                          .doc(_auth.currentUser.uid)
-                          .update({
-                        "ownedStickers": FieldValue.arrayUnion(
-                            [myUser.availableStickers[randomNumber]]),
-                        "availableStickers": FieldValue.arrayRemove(
-                            [myUser.availableStickers[randomNumber]])
-                      });
+                        await FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(_auth.currentUser.uid)
+                            .update({
+                          "ownedStickers": FieldValue.arrayUnion(
+                              [myUser.availableStickers[randomNumber]]),
+                          "availableStickers": FieldValue.arrayRemove(
+                              [myUser.availableStickers[randomNumber]])
+                        });
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                                content: new SingleChildScrollView(
+                                    child: Text(
+                                        "You already owned all the stickers!"))));
+                      }
                     },
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.pinkAccent)),
-                    child: Text('Submit'),
+                    child: Text("Let's random!"),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                      content: new SingleChildScrollView(
+                                          child: Column(
+                                    children: [
+                                      ...myUser.ownedStickers.map((e) =>
+                                          Image.asset("./assets/pictures/" + e))
+                                    ],
+                                  ))));
+                        },
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.teal[200])),
+                        child: Text('Obtained stickers',
+                            style: TextStyle(color: Colors.brown)),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (myUser.availableStickers.length > 0) {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                        content: new SingleChildScrollView(
+                                            child: Column(
+                                      children: [
+                                        ...myUser.availableStickers.map((e) =>
+                                            Image.asset(
+                                                "./assets/pictures/" + e))
+                                      ],
+                                    ))));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                    content: new SingleChildScrollView(
+                                        child: Text(
+                                            "You already owned all the stickers!"))));
+                          }
+                        },
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.yellow[200])),
+                        child: Text(
+                          'Available stickers',
+                          style: TextStyle(color: Colors.brown),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

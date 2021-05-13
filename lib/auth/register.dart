@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_time/auth/utils.dart';
-import 'package:my_time/intro/intro1.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -71,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         filled: true,
                         hintStyle: new TextStyle(color: Colors.grey[400]),
-                        hintText: "Please enter yoyr password",
+                        hintText: "Please enter your password",
                         fillColor: Colors.white70),
                     // The validator receives the text that the user has entered.
                     obscureText: true,

@@ -23,13 +23,23 @@ class Intro2 extends StatelessWidget {
               height: 50,
             ),
             Center(
-                child: Text(
-              "Begin your journal",
-            )),
+                child: Text("Let's join us",
+                    style: TextStyle(
+                        fontSize: 50,
+                        fontFamily: "Tropical",
+                        color: Colors.yellow[300]))),
             SizedBox(
-              height: 25,
+              height: 10,
             ),
-            Text("Insert stuff here..."),
+            Text("Be prepare to begin"),
+            SizedBox(
+              height: 10,
+            ),
+            Text("your journal with us"),
+            SizedBox(
+              height: 10,
+            ),
+            Text("we will be with you "),
             SizedBox(
               height: 25,
             ),
@@ -51,7 +61,7 @@ class Intro2 extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  "Hello",
+                  "Next!",
                   style: TextStyle(fontSize: 25),
                 ),
               ),

@@ -1,5 +1,8 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:my_time/Mainboard/creatediary.dart';
+import 'package:my_time/Mainboard/diarydashboard.dart';
+import 'package:my_time/Mainboard/settings.dart';
 import 'package:my_time/Mainboard/stickers.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -26,28 +29,56 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Time")),
+      // appBar: AppBar(title: Text("My Time")),
       body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _currentIndex = index);
-          },
-          children: <Widget>[
-            Container(
-              color: Colors.blueGrey,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                  "./assets/pictures/background1.png"), // <-- BACKGROUND IMAGE
+              fit: BoxFit.cover,
             ),
-            Container(
-              color: Colors.red,
-            ),
-            Container(
-              color: Colors.green,
-            ),
-            Container(
-              color: Colors.blue,
-            ),
-            StickersPage()
-          ],
+          ),
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() => _currentIndex = index);
+            },
+            children: <Widget>[
+              DiaryDashboardPage(),
+              CreateDiaryPage(),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'MY',
+                          style: TextStyle(
+                              fontSize: 100,
+                              color: Colors.white,
+                              fontFamily: "Tropical"),
+                        ),
+                        Text(
+                          'TIME',
+                          style: TextStyle(
+                              fontSize: 100,
+                              color: Colors.lightGreen[300],
+                              fontFamily: "Tropical"),
+                        ),
+                      ],
+                    ),
+                    CircularProgressIndicator()
+                  ],
+                ),
+              ),
+              StickersPage(),
+              SettingsPage()
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
@@ -57,14 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
           _pageController.jumpToPage(index);
         },
         items: <BottomNavyBarItem>[
-          BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.home)),
-          BottomNavyBarItem(title: Text('Item Two'), icon: Icon(Icons.apps)),
+          BottomNavyBarItem(title: Text('Diary'), icon: Icon(Icons.book)),
+          BottomNavyBarItem(title: Text('Create'), icon: Icon(Icons.edit)),
+          BottomNavyBarItem(title: Text('Profile'), icon: Icon(Icons.person)),
           BottomNavyBarItem(
-              title: Text('Item Three'), icon: Icon(Icons.chat_bubble)),
+              title: Text('RandomGifts'), icon: Icon(Icons.card_giftcard)),
           BottomNavyBarItem(
-              title: Text('Item Four'), icon: Icon(Icons.settings)),
-          BottomNavyBarItem(
-              title: Text('Stickers'), icon: Icon(Icons.card_giftcard)),
+              title: Text('Settings'), icon: Icon(Icons.settings)),
         ],
       ),
     );

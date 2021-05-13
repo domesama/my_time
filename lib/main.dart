@@ -69,17 +69,36 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Text(
                         'MY',
-                        style: TextStyle(fontSize: 40, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 100,
+                            color: Colors.white,
+                            fontFamily: "Tropical"),
                       ),
                       Text(
                         'TIME',
                         style: TextStyle(
-                            fontSize: 40, color: Colors.lightGreen[100]),
+                            fontSize: 100,
+                            color: Colors.lightGreen[100],
+                            fontFamily: "Tropical"),
                       ),
                     ],
                   ),
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: 250,
+                height: 300,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: AssetImage("./assets/pictures/sticker3.png"),
+                  alignment: Alignment.center,
+                  fit: BoxFit.fill,
+                )),
+                // child: Image.asset("./assets/pictures/sticker3.png")
+              )
             ],
           ),
         ),
