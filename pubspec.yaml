@@ -33,6 +33,8 @@ dependencies:
   cloud_firestore: ^2.1.0
   image_picker: ^0.7.5
   google_fonts: ^2.0.0
+  firebase_storage: ^8.0.6
+  flutter_staggered_grid_view: ^0.4.0
   # firebase_auth_web:
 
 dev_dependencies:
@@ -75,6 +77,9 @@ flutter:
     - family: Tropical
       fonts:
         - asset: assets/fonts/font1.ttf
+    - family: Mali
+      fonts:
+        - asset: assets/fonts/font2.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

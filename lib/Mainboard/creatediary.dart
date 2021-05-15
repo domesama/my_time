@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_time/auth/utils.dart';
@@ -176,12 +177,32 @@ class _CreateDiaryPageState extends State<CreateDiaryPage> {
               ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
+                      var picturePath = "";
+
+                      if (_image != null) {
+                        FirebaseAuth _auth = FirebaseAuth.instance;
+
+                        var filePath = "image/" +
+                            _auth.currentUser.uid +
+                            "/" +
+                            DateTime.now().toString();
+                        Reference ref =
+                            FirebaseStorage.instance.ref().child(filePath);
+
+                        try {
+                          UploadTask uploadTask = ref.putFile(_image);
+                          await uploadTask.whenComplete(() async =>
+                              picturePath = await ref.getDownloadURL());
+                        } on FirebaseException catch (e) {
+                          print(e);
+                        }
+                      }
                       try {
                         await createDiary(
                             title: _title,
                             content: _content,
                             dateTime: selectedDate,
-                            picturePath: "");
+                            picturePath: picturePath);
 
                         showDialog(
                             context: context,
@@ -189,7 +210,6 @@ class _CreateDiaryPageState extends State<CreateDiaryPage> {
                                   // title: new Text("My Super title"),
                                   content: new Text("Success!"),
                                 ));
-                        addUser();
                       } on FirebaseException catch (e) {
                         showDialog(
                             context: context,

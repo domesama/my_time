@@ -39,7 +39,7 @@ class _DiaryDashboardPageState extends State<DiaryDashboardPage> {
                         'MY',
                         style: TextStyle(
                             fontSize: 100,
-                            color: Colors.white,
+                            color: Colors.brown,
                             fontFamily: "Tropical"),
                       ),
                       Text(
@@ -60,20 +60,50 @@ class _DiaryDashboardPageState extends State<DiaryDashboardPage> {
                         itemCount: diaries.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
+                          // onTap: () {
+                          //   showDialog(
+                          //       context: context,
+                          //       builder: (_) => AlertDialog(
+                          //           title: Text(diaries[index].title),
+                          //           content: new SingleChildScrollView(
+                          //               child:
+                          //                   Text(diaries[index].content))));
+                          // },
                           return Card(
                             child: ListTile(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) => AlertDialog(
-                                        title: Text(diaries[index].title),
-                                        content: new SingleChildScrollView(
-                                            child:
-                                                Text(diaries[index].content))));
-                              },
-                              leading: Icon(Icons.book),
+                              leading: diaries[index].picturePath == ""
+                                  ? Icon(Icons.book)
+                                  : ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                          // minWidth: 100,
+                                          // minHeight: 260,
+                                          // maxWidth: 104,
+                                          // maxHeight: 264,
+                                          ),
+                                      child: Image.network(
+                                          diaries[index].picturePath)),
                               title: Text(diaries[index].title),
-                              trailing: Icon(Icons.more_vert),
+                              subtitle: Text(diaries[index].content.length > 10
+                                  ? diaries[index].content.substring(0, 12) +
+                                      "..."
+                                  : diaries[index].content),
+                              trailing: Text(diaries[index]
+                                      .dateTime
+                                      .toDate()
+                                      .day
+                                      .toString() +
+                                  "-" +
+                                  diaries[index]
+                                      .dateTime
+                                      .toDate()
+                                      .month
+                                      .toString() +
+                                  "-" +
+                                  diaries[index]
+                                      .dateTime
+                                      .toDate()
+                                      .year
+                                      .toString()),
                             ),
                           );
                         },

@@ -12,7 +12,6 @@ class Intro1 extends StatelessWidget {
                 fit: BoxFit.fill,
                 image: AssetImage("./assets/pictures/background1.png"))),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
@@ -48,20 +47,14 @@ class Intro1 extends StatelessWidget {
             Container(
               width: 125,
               height: 40,
-              child: TextButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Intro2()));
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.pink),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.pink[200])),
                 child: Text(
                   "Next...",
                   style: TextStyle(fontSize: 25),

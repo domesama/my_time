@@ -6,23 +6,26 @@ import 'package:my_time/models/diary.dart';
 Future<void> addUser() {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   FirebaseAuth _auth = FirebaseAuth.instance;
+  print("In add user function");
 
-  return users
-      .doc(_auth.currentUser.uid)
-      .set({
-        'uid': _auth.currentUser.uid,
-        'email': _auth.currentUser.email,
-        'profileImage': null,
-        'ownedStickers': [],
-        'availableStickers': [
-          "sticker1.png",
-          "sticker2.png",
-          "sticker3.png",
-          "sticker4.png"
-        ]
-      })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+  return users.doc(_auth.currentUser.uid).set({
+    'uid': _auth.currentUser.uid,
+    'email': _auth.currentUser.email,
+    'profileImage': null,
+    'ownedStickers': [],
+    'availableStickers': [
+      "sticker1.png",
+      "sticker2.png",
+      "sticker3.png",
+      "sticker4.png"
+    ]
+  }).then((value) {
+    users
+        .doc(_auth.currentUser.uid)
+        .collection("diary")
+        .doc("diary")
+        .set({"diary": []});
+  }).catchError((error) => print("Failed to add user: $error"));
 }
 
 Future<Map<String, dynamic>> getUserDetails() async {
@@ -50,6 +53,7 @@ Future<void> createDiary(
   FirebaseAuth _auth = FirebaseAuth.instance;
   CollectionReference diary = FirebaseFirestore.instance.collection('users');
 
+  print("In create diary function");
   return diary
       .doc(_auth.currentUser.uid)
       .collection("diary")
@@ -57,16 +61,16 @@ Future<void> createDiary(
       .update({
         "diary": FieldValue.arrayUnion([
           {
-            'uid': _auth.currentUser.uid,
             'title': title,
             'content': content,
             'dateTime': dateTime,
             'picturePath': picturePath,
           },
-        ])
+        ]),
+        // "test",
       })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+      .then((value) => print("Diary Added"))
+      .catchError((error) => print("Failed to add diary: $error"));
 }
 
 Future<List<Diary>> getAllDiaryByUid() async {

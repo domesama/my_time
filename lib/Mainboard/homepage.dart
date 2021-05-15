@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_time/Mainboard/creatediary.dart';
 import 'package:my_time/Mainboard/diarydashboard.dart';
 import 'package:my_time/Mainboard/settings.dart';
+import 'package:my_time/Mainboard/show_all_picture.dart';
 import 'package:my_time/Mainboard/stickers.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -47,34 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               DiaryDashboardPage(),
               CreateDiaryPage(),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'MY',
-                          style: TextStyle(
-                              fontSize: 100,
-                              color: Colors.white,
-                              fontFamily: "Tropical"),
-                        ),
-                        Text(
-                          'TIME',
-                          style: TextStyle(
-                              fontSize: 100,
-                              color: Colors.lightGreen[300],
-                              fontFamily: "Tropical"),
-                        ),
-                      ],
-                    ),
-                    CircularProgressIndicator()
-                  ],
-                ),
-              ),
+              ShowAllPicturepage(),
               StickersPage(),
               SettingsPage()
             ],
@@ -90,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(title: Text('Diary'), icon: Icon(Icons.book)),
           BottomNavyBarItem(title: Text('Create'), icon: Icon(Icons.edit)),
-          BottomNavyBarItem(title: Text('Profile'), icon: Icon(Icons.person)),
+          BottomNavyBarItem(title: Text('My Album'), icon: Icon(Icons.person)),
           BottomNavyBarItem(
               title: Text('RandomGifts'), icon: Icon(Icons.card_giftcard)),
           BottomNavyBarItem(

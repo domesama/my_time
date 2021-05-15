@@ -45,42 +45,48 @@ class _AuthScreenState extends State<AuthScreen> {
                   alignment: Alignment.center,
                   fit: BoxFit.fill,
                   image: AssetImage("./assets/pictures/background1.png"))),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 100,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'MY',
-                      style: TextStyle(
-                          fontSize: 100,
-                          color: Colors.white,
-                          fontFamily: "Tropical"),
-                    ),
-                    Text(
-                      'TIME',
-                      style: TextStyle(
-                          fontSize: 100,
-                          color: Colors.lightGreen[300],
-                          fontFamily: "Tropical"),
-                    ),
-                  ],
-                ),
-                _wantsLogin ? LoginPage() : RegisterPage(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ..._wantsLogin
-                        ? _loginSwitchMessage
-                        : _registerSwitchMessage
-                  ],
-                ),
-              ]),
+          child: Center(
+            child: Stack(children: [
+              SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'MY',
+                            style: TextStyle(
+                                fontSize: 100,
+                                color: Colors.white,
+                                fontFamily: "Tropical"),
+                          ),
+                          Text(
+                            'TIME',
+                            style: TextStyle(
+                                fontSize: 100,
+                                color: Colors.lightGreen[300],
+                                fontFamily: "Tropical"),
+                          ),
+                        ],
+                      ),
+                      _wantsLogin ? LoginPage() : RegisterPage(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ..._wantsLogin
+                              ? _loginSwitchMessage
+                              : _registerSwitchMessage
+                        ],
+                      ),
+                    ]),
+              ),
+            ]),
+          ),
         ),
       ),
     );

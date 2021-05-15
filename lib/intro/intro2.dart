@@ -46,22 +46,15 @@ class Intro2 extends StatelessWidget {
             Container(
               width: 125,
               height: 40,
-              child: TextButton(
+              child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => AuthScreen()));
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.pink),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
+                    backgroundColor: MaterialStateProperty.all(Colors.brown)),
                 child: Text(
-                  "Next!",
+                  "Next...",
                   style: TextStyle(fontSize: 25),
                 ),
               ),
